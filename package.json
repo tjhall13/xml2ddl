@@ -1,0 +1,24 @@
+{
+  "name": "xml2ddl",
+  "version": "0.0.1",
+  "description": "Convert xml rules to ddl file",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/tjhall13/xml2ddl.git"
+  },
+  "keywords": [
+    "xml",
+    "ddl",
+    "mysql"
+  ],
+  "author": "Trevor Hall",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tjhall13/xml2ddl/issues"
+  },
+  "homepage": "https://github.com/tjhall13/xml2ddl#README"
+}
