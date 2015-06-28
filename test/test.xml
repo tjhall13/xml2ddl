@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<database name="givingest">
+    <table name="Users">
+        <column name="user_id"
+                type="INTEGER"
+                primaryKey="true"
+                autoIncrement="true"
+                required="true" />
+        <column name="name"
+                type="VARCHAR"
+                size="50"
+                required="true" />
+        <column name="email"
+                type="VARCHAR"
+                size="50"
+                required="true"
+                unique="true" />
+    </table>
+    <table name="Causes">
+        <column name="cause_id"
+                type="INTEGER"
+                primaryKey="true"
+                autoIncrement="true"
+                required="true" />
+        <column name="name"
+                type="VARCHAR"
+                size="50"
+                unique="true"
+                required="true" />
+        <column name="type"
+                type="VARCHAR"
+                size="20"
+                required="true" />
+        <column name="website"
+                type="VARCHAR"
+                size="50"
+                required="true" />
+        <column name="about"
+                type="VARCHAR"
+                size="100"
+                required="true" />
+    </table>
+    <table name="Businesses">
+        <column name="business_id"
+                type="INTEGER"
+                primaryKey="true"
+                autoIncrement="true"
+                required="true" />
+        <column name="name"
+                type="VARCHAR"
+                size="50"
+                required="true" />
+        <column name="type"
+                type="VARCHAR"
+                size="20"
+                required="true" />
+        <column name="website"
+                type="VARCHAR"
+                size="50"
+                required="true" />
+        <column name="street"
+                type="VARCHAR"
+                size="50"
+                required="true" />
+        <column name="city"
+                type="VARCHAR"
+                size="50"
+                required="true" />
+        <column name="state"
+                type="VARCHAR"
+                size="2"
+                required="true" />
+        <column name="zip"
+                type="VARCHAR"
+                size="10"
+                required="true" />
+        <column name="phone"
+                type="VARCHAR"
+                size="50"
+                required="true" />
+        <column name="email"
+                type="VARCHAR"
+                size="50"
+                required="true" />
+        <column name="membership"
+                type="VARCHAR"
+                size="10"
+                required="true" />
+    </table>
+    <table name="UserLikes">
+        <column name="like_id"
+                type="INTEGER"
+                primaryKey="true"
+                autoIncrement="true"
+                required="true" />
+        <column name="user_id"
+                type="INTEGER"
+                required="true" />
+        <column name="cause_id"
+                type="INTEGER"
+                required="true" />
+        <foreign-key foreignTable="Users">
+            <reference local="user_id" foreign="user_id" />
+        </foreign-key>
+        <foreign-key foreignTable="Causes">
+            <reference local="cause_id" foreign="cause_id" />
+        </foreign-key>
+    </table>
+    <table name="UserFollows">
+        <column name="follow_id"
+                type="INTEGER"
+                primaryKey="true"
+                autoIncrement="true"
+                required="true" />
+        <column name="user_id"
+                type="INTEGER"
+                required="true" />
+        <column name="business_id"
+                type="INTEGER"
+                required="true" />
+        <foreign-key foreignTable="Users">
+            <reference local="user_id" foreign="user_id" />
+        </foreign-key>
+        <!--
+        <foreign-key foreignTable="Businesses">
+            <reference local="business_id" foreign="business_id">
+        </foreign-key>
+        -->
+    </table>
+</database>
