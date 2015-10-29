@@ -4,7 +4,7 @@ xml2ddl converts an xml schema to a sql data description language. It supports m
 
 # Installation
 
-Install using npm with ```sh npm install xml2ddl ```.
+Install using npm with ```npm install xml2ddl ```.
 
 # Usage
 

@@ -24,11 +24,27 @@ function generateDDL(data, syntax, callback) {
             if(!table['foreign-key']) {
                 table['foreign-key'] = [];
             }
+            if(!table['row']) {
+                table['row'] = [];
+            }
             
             table['column'].forEach(function(column) {
                 rule = column.$.name;
                 
                 rule = rule.concat(' ', column.$.type);
+                
+                switch(column.$.type.toLowerCase()) {
+                    case 'text':
+                    case 'blob':
+                    case 'varchar':
+                        if(column.$.charset) {
+                            rule = rule.concat(' CHARSET ', column.$.charset)
+                        }
+                        if(column.$.colate) {
+                            rule = rule.concat(' COLLATE ', column.$.collate);
+                        }
+                        break;
+                }
                 
                 if(column.$.size) {
                     rule = rule.concat('(', column.$.size, ')');
@@ -82,6 +98,21 @@ function generateDDL(data, syntax, callback) {
             
             ddl.unshift('DROP TABLE IF EXISTS ' + table.$.name + ';');
             ddl.push(entry);
+            
+            table['row'].forEach(function(row) {
+                if(!row['field']) {
+                    row['field'] = [];
+                }
+                
+                var fields = row['field'].reduce(function(entry, field) {
+                    entry[0] += "," + field.$.column;
+                    entry[1] += ",'" + field._ + "'";
+                    return entry;
+                }, ['', '']);
+                
+                entry = 'INSERT INTO ' + table.$.name + ' (' + fields[0].substr(1) + ')' + ' VALUES ' + '(' + fields[1].substr(1) + ');';
+                ddl.push(entry);
+            });
         });
         
         callback(null, ddl);
