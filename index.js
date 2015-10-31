@@ -28,7 +28,7 @@ function generateDDL(data, options, callback) {
                     throw new Error('no table name provided');
                 }
                 keys = [];
-                entry = 'CREATE TABLE ' + name + '(';
+                entry = 'CREATE TABLE ' + name + ' (';
                 
                 if(!table['column']) {
                     table['column'] = [];
@@ -79,6 +79,10 @@ function generateDDL(data, options, callback) {
                         if(column.$.unique) {
                             rule = rule.concat(' ', 'UNIQUE');
                         }
+                    }
+                    
+                    if(column.$.default) {
+                        rule = rule.concat(' ', 'DEFAULT "' + column.$.default + '"');
                     }
                     
                     entry = entry.concat(rule, ',');
