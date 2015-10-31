@@ -120,9 +120,14 @@ function generateDDL(data, options, callback) {
                         row['field'] = [];
                     }
                     
+                    var data;
                     var fields = row['field'].reduce(function(entry, field) {
+                        data = field._;
+                        if(!data) {
+                            data = '';
+                        }
                         entry[0] += "," + field.$.column;
-                        entry[1] += ",'" + field._ + "'";
+                        entry[1] += ",'" + data + "'";
                         return entry;
                     }, ['', '']);
                     
